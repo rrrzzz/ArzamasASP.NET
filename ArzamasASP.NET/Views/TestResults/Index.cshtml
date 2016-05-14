@@ -1,0 +1,66 @@
+﻿@model ArzamasASP.NET.Models.TestResults
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width"/>
+    <link type="text/css" rel="stylesheet" href="~/Content/Site.css"/>
+    <title>Test Results</title>
+</head>
+<body>
+<div>
+    <h1 style="float:left">Test Results!</h1>
+    <p>@Html.ActionLink("DropDown Menu", "DropMenuAjax", "TestResults")</p>
+</div>
+
+<table>
+    <tr>
+        <th colspan="7">Test Executions</th>
+    </tr>
+    <tr>
+        @foreach (var head in ViewBag.ExecutionHeaders)
+        {
+            <th>@head.Name</th>
+        }
+    </tr>
+    @foreach (var execution in Model.TestExecutions)
+    {
+        <tr>
+            @foreach (var head in ViewBag.ExecutionHeaders)
+            {
+                <td>@head.GetValue(execution, null)</td>
+            }
+
+        </tr>
+    }
+</table>
+    <p></p>
+    <table>
+        <tr>
+            <th colspan="7">Test Runs</th>
+        </tr>
+        <tr>
+            @foreach (var head in ViewBag.RunHeaders)
+            {
+                <th>@head.Name</th>
+            }
+        </tr>
+        @foreach (var run in Model.Runs)
+        {
+            <tr>
+                @foreach (var head in ViewBag.RunHeaders)
+                {
+                    <td>@head.GetValue(run, null)</td>
+                }
+
+            </tr>
+        }
+    </table>
+
+
+</body>
+</html>
